@@ -2,7 +2,7 @@
 
 This is a simple plugin for synchronizing the clipboards of `vim`/`nvim`,
 `tmux`, and a variety of operating systems, even over remote connections.
-It does so via a little known terminal escape code known as OSC 52.
+It does so via a terminal escape called OSC 52.
 
 There are other ways to accomplish similar things; you can e.g. use `xclip`,
 `wl-copy`, `clip.exe`, `pbcopy`. However, this requires different utilities on
@@ -20,7 +20,7 @@ install this plugin using a standard `vim` plugin manager like [`vim-plug`][3]:
 
 	Plug 'jabirali/vim-tmux-yank'
 
-Then enable OSC 52 on the `tmux` side, just add this to your `~/.tmux.conf`:
+Then enable OSC 52 on the `tmux` side, just add this to your `tmux.conf`:
 
 	set -g set-clipboard on
 
@@ -31,11 +31,17 @@ feature in the settings. If you now yank text in `vim` (try e.g. `Vy` or `yy`),
 the yanked text should be available from your `vim` clipboard, `tmux` clipboard,
 and operating system clipboard. It should automatically work over `ssh` too.
 
+This plugin lets you yank to your `tmux` and system clipboards, but you cannot
+paste via terminal escape codes. This is arguably a good thing: I don't mind servers
+I `ssh` into writing to my clipboard, but letting them read it is a privacy concern.
+Pasting content copied outside `vim` is perhaps best done using your terminal keyboard
+shortcut (I map it to <kbd>Alt</kbd>+<kbd>p</kbd>).
+
+
 # Acknowledgements
 
-Almost all of this code was copied from [this post][1] on Reddit, so all credit
-should go to that person. The only thing I did was to add `tmux` integration for
-discovering your `tty`, since just setting it to `/dev/tty` didn't work for me.
+Almost all of this code was copied from [Leeren's post on Reddit][1], so all 
+credit should go to them. The only thing I added was the `tmux tty` check.
 
 I tried some existing OSC-52 plugins, and none of them seemed to work on Neovim.
 According to Google, no-one else had wrapped this code as a plugin. To streamline
