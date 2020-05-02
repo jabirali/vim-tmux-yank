@@ -6,11 +6,11 @@ It does so via a little known terminal escape code known as OSC 52.
 
 There are other ways to accomplish similar things; you can e.g. use `xclip`,
 `wl-copy`, `clip.exe`, `pbcopy`. However, this requires different utilities on
-different operating systems, and doesn't always work over `ssh`. Notably, many
-hosts disable `X11` forwarding for security reasons, many headless servers
-don't have `X11` or `xclip` installed, and Wayland or WSL users may not want an
-`X` server installed just so they can get basic clipboard functionality. 
-OSC 52, in contrast, works transparently over `ssh` and across platforms.
+different systems, and doesn't always work over `ssh`. Notably, many hosts 
+disable X forwarding for security reasons, many headless servers don't have
+X installed, and Wayland or WSL users may not want an X server just to get
+basic clipboard functionality.  OSC 52, in contrast, works transparently
+over `ssh` and across platforms.
 
 # Quickstart
 
