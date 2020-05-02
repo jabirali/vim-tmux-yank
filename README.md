@@ -16,7 +16,7 @@ over `ssh` and across platforms.
 
 This plugin assumes you use `vim` or `nvim` inside of `tmux`, and wish to synchronize
 your clipboards in `tmux`, `vim`/`nvim`, and your operating system. You can
-install this plugin using a standard `vim` plugin manager like `vim-plug`:
+install this plugin using a standard `vim` plugin manager like [`vim-plug`][3]:
 
 	Plug 'jabirali/vim-tmux-yank'
 
@@ -25,7 +25,7 @@ Then enable OSC 52 on the `tmux` side, just add this to your `~/.tmux.conf`:
 	set -g set-clipboard on
 
 This is sufficient to integrate your `vim` and `tmux` clipboards. Some terminals
-like `alacritty` set your operating system clipboard by default when an OSC 52
+like [Alacritty][2] set your operating system clipboard by default when an OSC 52
 code is intercepted, others like iTerm reportedly require you to enable this
 feature in the settings. If you now yank text in `vim` (try e.g. `Vy` or `yy`),
 the yanked text should be available from your `vim` clipboard, `tmux` clipboard,
@@ -42,3 +42,5 @@ According to Google, no-one else had wrapped this code as a plugin. To streamlin
 things for other users like me, I therefore wrapped it as a plugin myself.
 
 [1]: https://www.reddit.com/r/vim/comments/ac9eyh/talk_i_gave_on_going_mouseless_with_vim_tmux/ed6kl67/
+[2]: https://github.com/alacritty/alacritty
+[3]: https://github.com/junegunn/vim-plug
