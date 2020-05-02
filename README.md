@@ -1,25 +1,35 @@
 # Vim Tmux Yank
 
-There exists a little known terminal escape code known as `OSC 52`, which lets 
-terminal applications write to the clipboard. Interestingly, `tmux` supports this
-escape code if you `set -g set-clipboard on` in your `~/.tmux.conf`, in which case
-`tmux` can both intercept `OSC 52` codes from applications like `nvim`, and simultaneously 
-forward these instructions to your terminal. If you use a terminal that supports this
-escape code, this provides a simple way to synchronize the clipboards in `nvim`, `tmux`, 
-and your OS. This is a plugin for `vim` and `nvim` that makes this happen.
+This is a simple plugin for synchronizing the clipboards of `vim`/`nvim`,
+`tmux`, and a variety of operating systems, even over remote connections.
+It does so via a little known terminal escape code known as OSC 52.
 
-There are other ways to accomplish similar things; you can e.g. use `xclip`, `wl-copy`,
-`clip.exe`, `pbcopy`. However, this requires different utilities on different operating
-systems, and doesn't always work over `ssh`. Notably, many hosts disable `X11` forwarding 
-for security reasons, many headless servers don't have `X11` or `xclip` installed, and 
-Wayland or WSL users may not want an `X` servers just to get a clipboard working.
-`OSC 52`, in contrast, works transparently over `ssh` and across platforms.
+There are other ways to accomplish similar things; you can e.g. use `xclip`,
+`wl-copy`, `clip.exe`, `pbcopy`. However, this requires different utilities on
+different operating systems, and doesn't always work over `ssh`. Notably, many
+hosts disable `X11` forwarding for security reasons, many headless servers
+don't have `X11` or `xclip` installed, and Wayland or WSL users may not want an
+`X` server installed just so they can get basic clipboard functionality. 
+OSC 52, in contrast, works transparently over `ssh` and across platforms.
 
-This plugin assumes that you wish to synchronize your clipboards in `tmux`, `vim`/`nvim`,
-and your operating system, and that you only use `vim`/`nvim` inside `tmux`. You
-can then install it using a standard plugin manager like `vim-plug`:
+# Quickstart
+
+This plugin assumes you use `vim` or `nvim` inside of `tmux`, and wish to synchronize
+your clipboards in `tmux`, `vim`/`nvim`, and your operating system. You can
+install this plugin using a standard `vim` plugin manager like `vim-plug`:
 
 	Plug 'jabirali/vim-tmux-yank'
+
+Then enable OSC 52 on the `tmux` side, just add this to your `~/.tmux.conf`:
+
+	set -g set-clipboard on
+
+This is sufficient to integrate your `vim` and `tmux` clipboards. Some terminals
+like `alacritty` set your operating system clipboard by default when an OSC 52
+code is intercepted, others like iTerm reportedly require you to enable this
+feature in the settings. If you now yank text in `vim` (try e.g. `Vy` or `yy`),
+the yanked text should be available from your `vim` clipboard, `tmux` clipboard,
+and operating system clipboard. It should automatically work over `ssh` too.
 
 # Acknowledgements
 
